@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Convert between units like length, volume, area, and more with Simplivert - your universal unit converter.">
+    <title>Universal Unit Converter - Simplivert</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Simplivert Logo" class="logo" />
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Universal Unit Converter</h2>
+            <p>Convert between various units like length, volume, area, and more.</p>
+
+            <div class="converter">
+                <label for="unitType">Select Conversion Type:</label>
+                <select id="unitType" onchange="updateUnits()">
+                    <option value="length">Length</option>
+                    <option value="volume">Volume</option>
+                    <option value="area">Area</option>
+                    <option value="dataTransfer">Data Transfer Rate</option>
+                    <option value="digitalStorage">Digital Storage</option>
+                    <option value="energy">Energy</option>
+                    <option value="frequency">Frequency</option>
+                    <option value="mass">Mass</option>
+                    <option value="planeAngle">Angle</option>
+                    <option value="pressure">Pressure</option>
+                    <option value="speed">Speed</option>
+                    <option value="time">Time</option>
+                    <option value="temperature">Temperature</option>
+                    <option value="force">Force</option>
+                    <option value="power">Power</option>
+                    <option value="electricCurrent">Electric Current</option>
+                    <option value="voltage">Voltage</option>
+                    <option value="resistance">Resistance</option>
+                    <option value="fuelConsumption">Fuel Consumption</option>
+                </select>
+
+                <div class="conversion-group">
+                    <input type="number" id="inputValue" placeholder="Enter value" step="any">
+                    <select id="inputUnit"></select>
+                    <span>to</span>
+                    <select id="outputUnit"></select>
+                    <button onclick="convert()">Convert</button>
+                </div>
+                
+                <div id="result"></div>
+            </div>
+        </div>
+
+        <div class="formulas-container">
+            <h2>Conversion Formulas</h2>
+            <p>1. <strong>Length:</strong> To convert meters to kilometers, divide by 1000.</p>
+            <p>2. <strong>Weight:</strong> To convert grams to kilograms, divide by 1000.</p>
+            <p>3. <strong>Temperature:</strong> To convert Celsius to Fahrenheit, use: <br>
+               <em>F = (C × 9/5) + 32</em></p>
+            <!-- More to be added later on -->
+        </div>
+        
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
