@@ -23,7 +23,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('kekw.jpg'); /* Ensure this image is high-resolution */
+    background-image: url('kekw.webp'); /* Ensure this image is high-resolution */
     background-size: cover; /* Ensures full coverage without stretching */
     background-position: center; /* Centers the image */
     opacity: .9; /* Adjusted for better visibility of the background image */
