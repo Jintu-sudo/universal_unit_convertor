@@ -6,6 +6,7 @@ let operation = null;
 // Append numbers and decimal point to the display
 function appendValue(value) {
     currentInput += value;
+    display.focus();
     display.value = currentInput;
 }
 
@@ -19,6 +20,7 @@ function clearDisplay() {
 function appendOperation(op) {
     currentInput += ' ' + op + ' ';
     display.value = currentInput;
+    display.focus();
 }
 
 // Perform the main calculation
@@ -111,3 +113,6 @@ document.addEventListener('keydown', function(event) {
         calculatePower();
     }
 });
+
+// Maintain focus on the display for external keyboard input
+display.addEventListener('focus', () => display.setSelectionRange(display.value.length, display.value.length));
