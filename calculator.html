@@ -6,6 +6,7 @@
     <title>Scientific Calculator - Simplivert</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="calculator.css"> <!-- Link to calculator-specific CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.css"> <!-- Link to Math.js library CSS -->
 </head>
 <body>
     <header>
@@ -25,7 +26,8 @@
             <p>Perform advanced mathematical calculations.</p>
 
             <div class="calculator">
-                <input type="text" id="display" disabled />
+                <input type="text" id="display" readonly onclick="this.removeAttribute('readonly');this.focus();this.setSelectionRange(this.value.length, this.value.length);" />
+                <div id="caret"></div> <!-- Adding a caret -->
 
                 <div class="buttons">
                     <button onclick="appendNumber('7')">7</button>
@@ -62,6 +64,7 @@
         </div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.1.1/math.min.js"></script> <!-- Link to Math.js library -->
     <script src="calculator.js"></script> <!-- Link to calculator-specific JavaScript -->
 </body>
 </html>
