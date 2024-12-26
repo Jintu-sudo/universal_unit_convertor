@@ -1,24 +1,115 @@
-// Units data for all categories
 const units = {
-    length: { meter: 1, kilometer: 0.001, centimeter: 100, millimeter: 1000, mile: 0.000621371, yard: 1.09361, foot: 3.28084, inch: 39.3701 },
-    volume: { liter: 1, milliliter: 1000, cubic_meter: 0.001, gallon: 0.264172, quart: 1.05669, pint: 2.11338, cup: 4.22675 },
-    area: { square_meter: 1, hectare: 0.0001, acre: 0.000247105, square_foot: 10.7639, square_yard: 1.19599 },
-    dataTransfer: { bps: 1, kbps: 0.001, mbps: 0.000001, gbps: 0.000000001 },
-    digitalStorage: { byte: 1, kilobyte: 0.001, megabyte: 0.000001, gigabyte: 0.000000001 },
-    energy: { joule: 1, kilojoule: 0.001, calorie: 0.239006, watt_hour: 0.000277778 },
-    frequency: { hertz: 1, kilohertz: 0.001, megahertz: 0.000001 },
-    mass: { kilogram: 1, gram: 1000, milligram: 1000000, pound: 2.20462, ounce: 35.274 },
-    planeAngle: { radian: 1, degree: 57.2958, gon: 63.662 },
-    pressure: { pascal: 1, bar: 0.00001, psi: 0.000145038 },
-    speed: { meter_per_second: 1, kilometer_per_hour: 3.6, mile_per_hour: 2.23694 },
-    time: { second: 1, minute: 0.0166667, hour: 0.000277778 },
-    temperature: { celsius: 1, fahrenheit: (x) => (x - 32) * 5 / 9, kelvin: (x) => x - 273.15 },
-    force: { newton: 1, dyne: 100000, pound_force: 0.224809 },
-    power: { watt: 1, kilowatt: 0.001, horsepower: 0.00134102 },
-    electricCurrent: { ampere: 1, milliampere: 1000 },
-    voltage: { volt: 1, millivolt: 1000, kilovolt: 0.001 },
-    resistance: { ohm: 1, kiloohm: 0.001, megaohm: 0.000001 },
-    fuelConsumption: { liter_per_100km: 1, mpg_us: 235.214583, mpg_uk: 282.481 },
+    length: {
+        meter: 1,
+        kilometer: 1000,
+        centimeter: 0.01,
+        millimeter: 0.001,
+        mile: 1609.344,
+        yard: 0.9144,
+        foot: 0.3048,
+        inch: 0.0254
+    },
+    volume: {
+        liter: 1,
+        milliliter: 0.001,
+        cubic_meter: 1000,
+        gallon: 3.78541,
+        quart: 0.946353,
+        pint: 0.473176,
+        cup: 0.236588
+    },
+    area: {
+        square_meter: 1,
+        hectare: 10000,
+        acre: 4046.85642,
+        square_foot: 0.092903,
+        square_yard: 0.836127
+    },
+    dataTransfer: {
+        bps: 1,
+        kbps: 1024,
+        mbps: 1024 ** 2,
+        gbps: 1024 ** 3
+    },
+    digitalStorage: {
+        byte: 1,
+        kilobyte: 1024,
+        megabyte: 1024 ** 2,
+        gigabyte: 1024 ** 3
+    },
+    energy: {
+        joule: 1,
+        kilojoule: 1000,
+        calorie: 4.184,
+        watt_hour: 3600,
+        kilowatt_hour: 3600000
+    },
+    frequency: {
+        hertz: 1,
+        kilohertz: 1000,
+        megahertz: 1000000
+    },
+    mass: {
+        kilogram: 1,
+        gram: 0.001,
+        milligram: 0.000001,
+        pound: 0.453592,
+        ounce: 0.0283495
+    },
+    planeAngle: {
+        radian: 1,
+        degree: 57.2958,
+        gon: 63.662
+    },
+    pressure: {
+        pascal: 1,
+        bar: 100000,
+        psi: 6894.76
+    },
+    speed: {
+        meter_per_second: 1,
+        kilometer_per_hour: 1 / 3.6,
+        mile_per_hour: 1 / 2.23694
+    },
+    time: {
+        second: 1,
+        minute: 60,
+        hour: 3600
+    },
+    temperature: {
+        celsius: 1,
+        fahrenheit: (x) => (x - 32) * 5 / 9,
+        kelvin: (x) => x - 273.15
+    },
+    force: {
+        newton: 1,
+        dyne: 0.00001,
+        pound_force: 4.44822
+    },
+    power: {
+        watt: 1,
+        kilowatt: 1000,
+        horsepower: 745.7
+    },
+    electricCurrent: {
+        ampere: 1,
+        milliampere: 0.001
+    },
+    voltage: {
+        volt: 1,
+        millivolt: 0.001,
+        kilovolt: 1000
+    },
+    resistance: {
+        ohm: 1,
+        kiloohm: 1000,
+        megaohm: 1000000
+    },
+    fuelConsumption: {
+        liter_per_100km: 1,
+        mpg_us: 235.214583,
+        mpg_uk: 282.481
+    },
 };
 
 // Elements
@@ -27,8 +118,9 @@ const inputUnitElement = document.getElementById('inputUnit');
 const outputUnitElement = document.getElementById('outputUnit');
 const inputValueElement = document.getElementById('inputValue');
 const resultElement = document.getElementById('result');
+const formulaElement = document.getElementById('formula');
 
-// Initialize conversion options
+// Update units and formula
 function updateUnits() {
     const selectedType = unitTypeElement.value;
     const unitOptions = units[selectedType];
@@ -41,6 +133,9 @@ function updateUnits() {
         inputUnitElement.innerHTML += `<option value="${unit}">${unit}</option>`;
         outputUnitElement.innerHTML += `<option value="${unit}">${unit}</option>`;
     }
+
+    // Display formula (if any logic for formula is implemented)
+    // formulaElement.textContent = getFormula(selectedType);
 }
 
 // Conversion logic
@@ -59,18 +154,15 @@ function convert() {
     if (selectedType === 'temperature') {
         let tempInCelsius;
 
-        // Convert input value to Celsius
         if (inputUnit === 'celsius') {
             tempInCelsius = inputValue;
         } else if (inputUnit === 'fahrenheit') {
             tempInCelsius = units.temperature.fahrenheit(inputValue);
         } else if (inputUnit === 'kelvin') {
-            tempInCelsius = inputValue - 273.15;
+            tempInCelsius = units.temperature.kelvin(inputValue);
         }
 
         let convertedValue;
-
-        // Convert Celsius to desired output unit
         if (outputUnit === 'celsius') {
             convertedValue = tempInCelsius;
         } else if (outputUnit === 'fahrenheit') {
@@ -79,16 +171,47 @@ function convert() {
             convertedValue = tempInCelsius + 273.15;
         }
 
-        resultElement.innerHTML = `${inputValue} ${inputUnit} = ${convertedValue.toFixed(4)} ${outputUnit}`;
+        // Format the result
+        resultElement.innerHTML = formatResult(inputValue, inputUnit, convertedValue, outputUnit);
         return;
     }
 
+    // Handle fuelConsumption conversion
+    if (selectedType === 'fuelConsumption') {
+        const inputUnitFactor = units.fuelConsumption[inputUnit];
+        const outputUnitFactor = units.fuelConsumption[outputUnit];
+
+        const convertedValue = inputValue * (outputUnitFactor / inputUnitFactor);
+
+        // Format the result
+        resultElement.innerHTML = formatResult(inputValue, inputUnit, convertedValue, outputUnit);
+        return;
+    }
+
+    // For other types of conversion (length, area, etc.)
     const inputUnitFactor = units[selectedType][inputUnit];
     const outputUnitFactor = units[selectedType][outputUnit];
-    const convertedValue = (inputValue * outputUnitFactor) / inputUnitFactor;
 
-    resultElement.innerHTML = `${inputValue} ${inputUnit} = ${convertedValue.toFixed(4)} ${outputUnit}`;
+    // Corrected conversion logic
+    let convertedValue;
+    if (inputUnitFactor > outputUnitFactor) {
+        convertedValue = inputValue * (inputUnitFactor / outputUnitFactor);
+    } else {
+        convertedValue = inputValue / (inputUnitFactor / outputUnitFactor);
+    }
+
+    // Format the result
+    resultElement.innerHTML = formatResult(inputValue, inputUnit, convertedValue, outputUnit);
 }
 
-// Initialize the first set of units
+// Function to format the result, showing decimals only when necessary
+function formatResult(inputValue, inputUnit, convertedValue, outputUnit) {
+    // Check if the converted value has decimal places
+    if (Number.isInteger(convertedValue)) {
+        return `${inputValue} ${inputUnit} = ${convertedValue} ${outputUnit}`;
+    } else {
+        return `${inputValue} ${inputUnit} = ${convertedValue.toFixed(2)} ${outputUnit}`;
+    }
+}
+
 updateUnits();
