@@ -1,118 +1,144 @@
-// Variables for holding current calculation and display
-let display = document.getElementById('display');
-let currentInput = '';
-let operation = null;
+document.addEventListener('DOMContentLoaded', (event) => {
+    let display = document.getElementById('display');
+    let currentInput = '';
+    let caret = document.getElementById('caret');
 
-// Append numbers and decimal point to the display
-function appendValue(value) {
-    currentInput += value;
-    display.focus();
-    display.value = currentInput;
-}
+    function updateDisplay(value) {
+        display.value = value;
+        currentInput = value;
+        updateCaret();
+        display.focus();
+    }
 
-// Clear the display and reset inputs
-function clearDisplay() {
-    currentInput = '';
-    display.value = '';
-}
+    function appendNumber(number) {
+        currentInput += number;
+        updateDisplay(currentInput);
+    }
 
-// Append operators to the calculation
-function appendOperation(op) {
-    currentInput += ' ' + op + ' ';
-    display.value = currentInput;
-    display.focus();
-}
-
-// Perform the main calculation
-function calculateResult() {
-    try {
-        display.value = eval(currentInput.replace('^', '**')); // Handle power operator as exponent
-        currentInput = display.value;
-    } catch (error) {
-        display.value = 'Error';
+    function clearDisplay() {
         currentInput = '';
-    }
-}
-
-// Scientific functions
-function calculateSine() {
-    display.value = Math.sin(parseFloat(display.value) * Math.PI / 180).toFixed(4); // Degree to radian
-    currentInput = display.value;
-}
-
-function calculateCosine() {
-    display.value = Math.cos(parseFloat(display.value) * Math.PI / 180).toFixed(4);
-    currentInput = display.value;
-}
-
-function calculateTangent() {
-    display.value = Math.tan(parseFloat(display.value) * Math.PI / 180).toFixed(4);
-    currentInput = display.value;
-}
-
-function calculateSquareRoot() {
-    display.value = Math.sqrt(parseFloat(display.value)).toFixed(4);
-    currentInput = display.value;
-}
-
-function calculatePower() {
-    currentInput += ' ^ ';
-    display.value = currentInput;
-}
-
-function calculateLog() {
-    display.value = Math.log10(parseFloat(display.value)).toFixed(4);
-    currentInput = display.value;
-}
-
-function calculateExp() {
-    display.value = Math.exp(parseFloat(display.value)).toFixed(4);
-    currentInput = display.value;
-}
-
-// Keyboard event handler
-document.addEventListener('keydown', function(event) {
-    const key = event.key;
-
-    // Handle numbers and decimal
-    if (!isNaN(key) || key === '.') {
-        appendValue(key);
+        updateDisplay('');
     }
 
-    // Handle basic operations
-    if (['+', '-', '*', '/'].includes(key)) {
-        appendOperation(key);
+    function setOperation(op) {
+        currentInput += ' ' + op + ' ';
+        updateDisplay(currentInput);
     }
 
-    // Handle Enter for equals
-    if (key === 'Enter') {
-        calculateResult();
+    function calculate() {
+        try {
+            let result = math.evaluate(currentInput.replace('^', '**'));
+            updateDisplay(result);
+            currentInput = result;
+        } catch (error) {
+            updateDisplay('Error');
+            currentInput = '';
+        }
     }
 
-    // Handle Escape to clear
-    if (key === 'Escape') {
-        clearDisplay();
+    function calculateSine() {
+        try {
+            let result = math.sin(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
     }
 
-    // Handle Backspace for removing last character
-    if (key === 'Backspace') {
-        currentInput = currentInput.slice(0, -1);
-        display.value = currentInput;
+    function calculateCosine() {
+        try {
+            let result = math.cos(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
     }
 
-    // Handle special scientific functions with specific keys
-    if (key === 's') calculateSine(); // "s" for sin
-    if (key === 'c') calculateCosine(); // "c" for cos
-    if (key === 't') calculateTangent(); // "t" for tan
-    if (key === 'l') calculateLog(); // "l" for log
-    if (key === 'e') calculateExp(); // "e" for exp
-    if (key === 'r') calculateSquareRoot(); // "r" for √ (root)
-
-    // Handle "^" for power (exponentiation)
-    if (key === '^') {
-        calculatePower();
+    function calculateTangent() {
+        try {
+            let result = math.tan(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
     }
+
+    function calculateSquareRoot() {
+        try {
+            let result = math.sqrt(parseFloat(display.value)).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
+    }
+
+    function calculatePower() {
+        currentInput += ' ^ ';
+        updateDisplay(currentInput);
+    }
+
+    function calculateLog() {
+        try {
+            let result = math.log10(parseFloat(display.value)).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
+    }
+
+    function calculateExp() {
+        try {
+            let result = math.exp(parseFloat(display.value)).toFixed(4);
+            updateDisplay(result);
+        } catch (error) {
+            updateDisplay('Error');
+        }
+    }
+
+    document.addEventListener('keydown', function (event) {
+        const key = event.key;
+        if (!isNaN(key) || key === '.') {
+            appendNumber(key);
+        }
+        if (['+', '-', '*', '/'].includes(key)) {
+            setOperation(key);
+        }
+        if (key === 'Enter') {
+            calculate();
+        }
+        if (key === 'Escape') {
+            clearDisplay();
+        }
+        if (key === 'Backspace') {
+            currentInput = currentInput.slice(0, -1);
+            updateDisplay(currentInput);
+        }
+        if (key === 's') calculateSine();
+        if (key === 'c') calculateCosine();
+        if (key === 't') calculateTangent();
+        if (key === 'l') calculateLog();
+        if (key === 'e') calculateExp();
+        if (key === 'r') calculateSquareRoot();
+        if (key === '^') {
+            calculatePower();
+        }
+    });
+
+    function updateCaret() {
+        caret.style.left = display.value.length * 10 + 'px'; // Adjust the caret position based on input length
+    }
+
+    display.addEventListener('focus', () => display.setSelectionRange(display.value.length, display.value.length));
+
+    window.appendNumber = appendNumber;
+    window.clearDisplay = clearDisplay;
+    window.setOperation = setOperation;
+    window.calculate = calculate;
+    window.calculateSine = calculateSine;
+    window.calculateCosine = calculateCosine;
+    window.calculateTangent = calculateTangent;
+    window.calculateSquareRoot = calculateSquareRoot;
+    window.calculatePower = calculatePower;
+    window.calculateLog = calculateLog;
+    window.calculateExp = calculateExp;
 });
-
-// Maintain focus on the display for external keyboard input
-display.addEventListener('focus', () => display.setSelectionRange(display.value.length, display.value.length));
