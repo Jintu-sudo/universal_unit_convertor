@@ -1,51 +1,44 @@
-document.getElementById('suggestionForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent the default form submission
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 
-    // Get the suggestion text
-    const suggestionText = document.getElementById('suggestionText').value;
+const firebaseConfig = {
+    apiKey: "AIzaSyDL8OMTtITV4xAYurAYZS7Hx3gQp3OLjzY",
+    authDomain: "simplivert.firebaseapp.com",
+    projectId: "simplivert",
+    storageBucket: "simplivert.firebasestorage.app",
+    messagingSenderId: "1002927561174",
+    appId: "1:1002927561174:web:3afaf169504c956634ac77",
+    measurementId: "G-KFSD3P164P"
+};
 
-    // Reference to the response message element
-    const responseMessage = document.getElementById('responseMessage');
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    try {
-        // Send the suggestion to the backend
-        const response = await fetch('http://localhost:3000/feedback', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ suggestion: suggestionText }),
-        });
+// Reference to the feedback collection in Firestore
+const feedbackCollection = collection(db, "feedback");
 
-        if (response.ok) {
-            // Show success message dynamically
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('suggestionForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const suggestionText = document.getElementById('suggestionText').value;
+        const responseMessage = document.getElementById('responseMessage');
+
+        try {
+            await addDoc(feedbackCollection, {
+                suggestion: suggestionText,
+                timestamp: new Date(),
+            });
             responseMessage.style.display = 'block';
             responseMessage.style.color = 'green';
             responseMessage.textContent = 'Thank you for your suggestion!';
-
-            // Clear the form
             document.getElementById('suggestionText').value = '';
-
-            // Show prompt
             alert('Thank you! Your feedback has been submitted successfully.');
-        } else {
-            // Show failure message dynamically
+        } catch (error) {
+            console.error('Error submitting suggestion:', error);
             responseMessage.style.display = 'block';
             responseMessage.style.color = 'red';
-            responseMessage.textContent = 'Failed to submit your suggestion. Please try again.';
-
-            // Show prompt
-            alert('Oops! Your feedback could not be submitted. Please try again.');
+            responseMessage.textContent = 'An error occurred. Please try again later.';
         }
-    } catch (error) {
-        console.error('Error submitting suggestion:', error);
-
-        // Show error message dynamically
-        responseMessage.style.display = 'block';
-        responseMessage.style.color = 'red';
-        responseMessage.textContent = 'An error occurred. Please try again later.';
-
-        // Show prompt
-        alert('An error occurred while submitting your feedback. Please try again later.');
-    }
+    });
 });
