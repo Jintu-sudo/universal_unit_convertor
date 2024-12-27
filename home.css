@@ -26,7 +26,7 @@ body::before {
     background-image: url('kekw.jpg');
     background-size: cover;
     background-position: center;
-    opacity: .9; 
+    opacity: 0.9;
     z-index: -1;
 }
 
@@ -45,110 +45,6 @@ header .logo {
     max-width: 275px;
     height: auto;
     margin-left: 0.5rem;
-}
-
-/* Main Content */
-.container {
-    max-width: 600px;
-    width: 100%; /* Ensure it adjusts to smaller screens */
-    margin-top: 2rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, .89);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-/* Container Header */
-.container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.container p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-/* Converter Styling */
-.converter label,
-.converter input,
-.converter select,
-.converter button {
-    font-size: 1rem;
-}
-
-.converter label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.converter .conversion-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 1rem;
-}
-
-.converter input[type="number"],
-.converter select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    color: #333;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.converter button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background-color: #4caf50;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.converter button:hover {
-    background-color: #45a049;
-}
-
-.converter button:active {
-    background-color: #3d8e3d;
-}
-
-#result {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-/* Formulas Container */
-.formulas-container {
-    max-width: 600px;
-    width: 100%; /* Ensure it adjusts to smaller screens */
-    margin-top: 2rem;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-}
-
-/* Formulas Container Header */
-.formulas-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.formulas-container p {
-    font-size: 1rem;
-    color: #666;
-    margin-bottom: 0.5rem;
 }
 
 /* Navigation Bar Styling */
@@ -178,9 +74,79 @@ header .logo {
     background-color: #555;
 }
 
+/* Main Content */
+.container {
+    max-width: 600px;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.89);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.container p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+/* Tool Section */
+.tool {
+    margin-bottom: 1rem;
+}
+
+.tool h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.tool p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Suggestions Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 0.75rem 1.5rem; /* Increased size */
+    border: none;
+    background-color: #4caf50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+form button:active {
+    background-color: #3d8e3d;
+}
+
 /* Media Queries for Smaller Screens */
 @media (max-width: 768px) {
-    .container, .formulas-container {
+    .container {
         padding: 1rem;
     }
 
@@ -190,11 +156,6 @@ header .logo {
 
     .navbar a {
         padding: 10px 15px;
-    }
-
-    .converter .conversion-group {
-        flex-direction: column;
-        gap: 5px;
     }
 }
 
@@ -210,14 +171,5 @@ header .logo {
 
     .navbar a {
         padding: 8px 10px;
-    }
-
-    .converter .conversion-group {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .converter button {
-        width: 100%;
     }
 }

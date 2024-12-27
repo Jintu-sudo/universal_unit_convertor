@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Convert between various currencies with Simplivert - your universal currency converter.">
+    <title>Universal Currency Converter - Simplivert</title>
+    <link rel="stylesheet" href="currency.css">
+</head>
+<body>
+    <header>
+        <img src="logo.jpg" alt="Simplivert Logo" class="logo" />
+        <nav>
+            <ul class="navbar">
+                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="index.html">Unit Converter</a></li>
+                <li><a href="currency.html">Currency Convertor</a></li>
+                <li><a href="calculator.html">Calculator</a></li>
+                <li><a href="suggestion.html">Suggestions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Universal Currency Converter</h2>
+            <p>Convert between various currencies using the latest exchange rates.</p>
+
+            <div class="converter">
+                <label for="currencyFrom">From:</label>
+                <select id="currencyFrom"></select>
+
+                <label for="currencyTo">To:</label>
+                <select id="currencyTo"></select>
+
+                <input type="number" id="amount" placeholder="Enter amount" step="any">
+                <button onclick="convertCurrency()">Convert</button>
+                
+                <div id="conversionResult"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="currency.js"></script>
+</body>
+</html>
