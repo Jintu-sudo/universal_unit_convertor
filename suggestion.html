@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Convert between units and currencies, and use our versatile calculator at Simplivert - your universal conversion and calculation tool.">
-    <title>Universal Converter and Calculator - Simplivert</title>
+    <meta name="description" content="We'd love to hear your thoughts or suggestions for Simplivert.">
+    <title>Suggestions - Simplivert</title>
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
@@ -11,11 +11,11 @@
         <img src="logo.jpg" alt="Simplivert Logo" class="logo" />
         <nav>
             <ul class="navbar">
-                <li><a href="home.html" class="active">Home</a></li>
+                <li><a href="home.html">Home</a></li>
                 <li><a href="index.html">Unit Converter</a></li>
-                <li><a href="currency.html">Currency Convertor</a></li>
+                <li><a href="currency.html">Currency Converter</a></li>
                 <li><a href="calculator.html">Calculator</a></li>
-                <li><a href="suggestion.html">Suggestions</a></li>
+                <li><a href="suggestion.html" class="active">Suggestions</a></li>
             </ul>
         </nav>
     </header>
@@ -25,12 +25,13 @@
             <h2>Suggestions</h2>
             <p>We'd love to hear your thoughts or suggestions:</p>
             <form id="suggestionForm">
-                <textarea name="suggestion" rows="5" placeholder="Enter your suggestion here"></textarea>
+                <textarea id="suggestionText" name="suggestion" rows="5" placeholder="Enter your suggestion here" required></textarea>
                 <button type="submit">Submit</button>
             </form>
+            <p id="responseMessage" style="color: green; display: none;">Thank you for your suggestion!</p>
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="suggestion.js"></script>
 </body>
 </html>
