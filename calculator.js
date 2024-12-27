@@ -1,144 +1,73 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    let display = document.getElementById('display');
-    let currentInput = '';
-    let caret = document.getElementById('caret');
+console.log("Scientific Calculator");
 
-    function updateDisplay(value) {
-        display.value = value;
-        currentInput = value;
-        updateCaret();
-        display.focus();
-    }
+var screen = document.querySelector('#screen');
+var btns = document.querySelectorAll('.btn');
 
-    function appendNumber(number) {
-        currentInput += number;
-        updateDisplay(currentInput);
-    }
+btns.forEach(
+    (btn) => btn.addEventListener('click', (e) => {
+        console.log(e.target);
+        btnText = e.target.innerText;
+        console.log(btnText);
 
-    function clearDisplay() {
-        currentInput = '';
-        updateDisplay('');
-    }
-
-    function setOperation(op) {
-        currentInput += ' ' + op + ' ';
-        updateDisplay(currentInput);
-    }
-
-    function calculate() {
-        try {
-            let result = math.evaluate(currentInput.replace('^', '**'));
-            updateDisplay(result);
-            currentInput = result;
-        } catch (error) {
-            updateDisplay('Error');
-            currentInput = '';
+        if (btnText == "×") {
+            btnText = "*";
         }
+        else if (btnText == "÷") {
+            btnText = "/";
+        }
+        screen.value += btnText;
+    })
+);
+
+function fact() {
+    let i = screen.value;
+    let sum = 1;
+    for (let j = 1; j <= i; j++) {
+        sum = sum * j;
     }
+    screen.value = sum;
+}
 
-    function calculateSine() {
-        try {
-            let result = math.sin(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function backspace() {
+    screen.value = screen.value.slice(0, screen.value.length - 1);
+}
 
-    function calculateCosine() {
-        try {
-            let result = math.cos(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function clearAll() {
+    screen.value = "";
+}
 
-    function calculateTangent() {
-        try {
-            let result = math.tan(math.unit(parseFloat(display.value), 'deg')).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function sin() {
+    screen.value = Math.sin(screen.value);
+}
 
-    function calculateSquareRoot() {
-        try {
-            let result = math.sqrt(parseFloat(display.value)).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function cos() {
+    screen.value = Math.cos(screen.value);
+}
 
-    function calculatePower() {
-        currentInput += ' ^ ';
-        updateDisplay(currentInput);
-    }
+function tan() {
+    screen.value = Math.tan(screen.value);
+}
 
-    function calculateLog() {
-        try {
-            let result = math.log10(parseFloat(display.value)).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function power() {
+    screen.value = Math.pow(screen.value, 2);
+}
 
-    function calculateExp() {
-        try {
-            let result = math.exp(parseFloat(display.value)).toFixed(4);
-            updateDisplay(result);
-        } catch (error) {
-            updateDisplay('Error');
-        }
-    }
+function sqrt() {
+    screen.value = Math.sqrt(screen.value);
+}
 
-    document.addEventListener('keydown', function (event) {
-        const key = event.key;
-        if (!isNaN(key) || key === '.') {
-            appendNumber(key);
-        }
-        if (['+', '-', '*', '/'].includes(key)) {
-            setOperation(key);
-        }
-        if (key === 'Enter') {
-            calculate();
-        }
-        if (key === 'Escape') {
-            clearDisplay();
-        }
-        if (key === 'Backspace') {
-            currentInput = currentInput.slice(0, -1);
-            updateDisplay(currentInput);
-        }
-        if (key === 's') calculateSine();
-        if (key === 'c') calculateCosine();
-        if (key === 't') calculateTangent();
-        if (key === 'l') calculateLog();
-        if (key === 'e') calculateExp();
-        if (key === 'r') calculateSquareRoot();
-        if (key === '^') {
-            calculatePower();
-        }
-    });
+function log() {
+    screen.value = Math.log(screen.value);
+}
 
-    function updateCaret() {
-        caret.style.left = display.value.length * 10 + 'px'; // Adjust the caret position based on input length
-    }
+function pi() {
+    screen.value = 3.14159265359;
+}
 
-    display.addEventListener('focus', () => display.setSelectionRange(display.value.length, display.value.length));
+function e() {
+    screen.value = 2.71828182846;
+}
 
-    window.appendNumber = appendNumber;
-    window.clearDisplay = clearDisplay;
-    window.setOperation = setOperation;
-    window.calculate = calculate;
-    window.calculateSine = calculateSine;
-    window.calculateCosine = calculateCosine;
-    window.calculateTangent = calculateTangent;
-    window.calculateSquareRoot = calculateSquareRoot;
-    window.calculatePower = calculatePower;
-    window.calculateLog = calculateLog;
-    window.calculateExp = calculateExp;
-});
+function solve() {
+    screen.value = eval(screen.value);
+}
