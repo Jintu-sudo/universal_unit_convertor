@@ -245,7 +245,7 @@ function formatResult(inputValue, inputUnit, convertedValue, outputUnit) {
     if (Number.isInteger(convertedValue)) {
         return `${inputValue} ${inputUnit} = ${convertedValue} ${outputUnit}`;
     } else {
-        return `${inputValue} ${inputUnit} = ${convertedValue.toFixed(5)} ${outputUnit}`;
+        return `${inputValue} ${inputUnit} = ${convertedValue.toFixed(10)} ${outputUnit}`;
     }
 }
 
